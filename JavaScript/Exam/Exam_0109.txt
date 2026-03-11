@@ -1,0 +1,125 @@
+//(1) give Only Unique From String
+let dev = "deloitte"    //dloi
+//-------------------(I)--------------
+let repetedChar = []
+let result = []
+for(let i of dev){
+    result.includes(i) ? repetedChar.push(i) : result.push(i)
+}
+// console.log(repetedChar,result)
+for(let i in result){
+    if(repetedChar.includes( result[i] )){
+        result.splice(i,1)
+    }
+}
+result = result.join("")
+console.log(`Repeated Characters : "${repetedChar.join("") }" & Non-Repeted : "${result}"`)
+result = []
+
+
+
+//------------------ (II) ---------------
+let tempA = dev.split("")
+let repeted = []
+let temp ;
+for(let char in tempA){
+    temp = dev.indexOf( tempA[char], parseInt(char) + 1 )
+    temp == -1 && !repeted.includes(tempA[char])  ?  result.push(tempA[char]) : repeted.push(tempA[char])
+}
+result = result.join("")
+console.log(`Non-Repeted : "${result}"`)
+
+
+//-------------------(III)---------------
+temp = 0
+let count = 0
+result = []
+for(let i of dev){
+    temp = dev.indexOf(i)
+    while(temp != -1){
+        temp = dev.indexOf(i, temp+1)
+        count ++
+    }
+    // console.log(`${i} : ${count} : ${temp}` )
+    if(count == 1){
+        result.push(i)
+    }
+    count = 0
+}
+result = result.join("")
+console.log(`Non-Repeted : "${result}"`)
+
+
+
+//-------------------------------------------------------------
+//(2) Keep only characters which appears twice 
+//FOR EX: String = "success" Output = c
+let dev = "success"
+let charWant = 2
+let result = []
+let count = 1
+let temp ;
+
+let tempDev = new Set(dev)
+// // iterate only uniq
+for(let i of tempDev){
+    temp = dev.indexOf(i)
+    while(temp != -1){
+        temp = dev.indexOf(i, temp + 1)
+        if(temp != -1){
+            count ++
+        }
+    }
+    //  console.log(`${i} : ${count}`)
+    if(count === charWant){
+        result.push(i)
+    }
+    count = 1
+}
+result = result.join("")
+console.log(result)
+
+//-------------------------------------------------------------
+//(3) Flatt The Objet
+const input = {
+  user: {
+    name: "Alice",
+    contact: {
+      email: "alice@example.com",
+      phone: {
+        mobile: "1234567890",
+        landline: "0112345678"
+      }
+    },
+    preferences: {
+      notifications: {
+        email: true,
+        sms: false
+      },
+      theme: "dark"
+    }
+  },
+  meta: {
+    createdAt: "2025-07-29",
+    verified: true,
+  }
+}
+
+let flat = {}
+let temp = []
+let flattenObject = obj => {
+    for(let key in obj){
+        temp.push(key)
+        //typeof obj[key] == "object" ? flattenObject(obj[key]) : ( flat[temp.join(".")] = obj[key], temp.pop() )
+        if(typeof obj[key] == "object"){
+            flattenObject(obj[key])
+        }else{
+            flat[temp.join(".")] = obj[key]
+            temp.pop()
+        }
+    }
+    temp.pop()
+}
+
+flattenObject(input);
+console.log(flat)
