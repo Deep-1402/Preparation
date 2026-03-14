@@ -21,7 +21,12 @@ V) MEMORY : fasted engine to createtemporary tables in memory(heap), so data los
 => DECIMAL(25, 4) : number With decimal Points. occupies 4 bytes, here 25 is INTEGER & 4 is Decimal NUmbers
 => DATE, TIME, YEAR, DATETIME, TIMESTAMP
 => BLOB (binary large object): stores complex file like image,vedio, audio,docs. 
-=> TEXT, BIT, , JSON, 
+=> enum : store one value from a predefined list.
+=> TINYINT : Stores very small integer numbers. e.g. flags like 0/1 (true/false).
+=> SMALLINT => Stores small integer numbers.Range: -32,768 to 32,767.
+=> MEDIUMINT => 
+TEXT, BIT, , JSON, 
+ text, longtext, sorttext
 
 
 @Syntax
